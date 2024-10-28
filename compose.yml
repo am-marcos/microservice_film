@@ -56,7 +56,7 @@ services:
   user-backend:
     build: {
       context: ./,
-      dockerfile: docker/users/node/Dockerfile
+      dockerfile: docker/user/node/Dockerfile
     }
     restart: always
     ports:
