@@ -11,12 +11,7 @@ if (!dbUri || !dbName) {
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(
-      `${dbUri}${dbName}?retryWrites=true&w=majority&ssl=true`,
-      {
-        serverSelectionTimeoutMS: 30000, // Augmente le délai d'attente à 30 secondes
-      }
-    );
+    await mongoose.connect(dbUri, {});
     console.log("Connected to the database");
   } catch (err) {
     console.error("Database connection error:", err);
