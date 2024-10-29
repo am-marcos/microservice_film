@@ -13,6 +13,7 @@ const userSchema = new Schema<IUser>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  status: { type: String, default: '' }
 });
 
 userSchema.pre('save', async function (next) {
@@ -31,6 +32,6 @@ userSchema.methods.comparePassword = function (candidatePassword: string): Promi
   return comparePassword(candidatePassword, this.password);
 };
 
-const User = model<IUser>('User', userSchema);
+const User = model<IUser>('User', userSchema, 'users');
 
 export default User;
