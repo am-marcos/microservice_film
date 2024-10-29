@@ -1,8 +1,13 @@
 import mongoose, { Schema } from 'mongoose';
 
 export const movieSchema = new Schema({
-    user_id: {type: String, required: true, unique : true},
-    movies: {type : Array<object>}
+    picture: String,
+    title: String,
+    summary: String,
+    release_date: Date,
+    author: Array<String>,
+    duration: Number,
+    genre: Array<String>
 });
 
 export const Movie = mongoose.model('Movie', movieSchema);
