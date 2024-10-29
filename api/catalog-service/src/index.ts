@@ -1,13 +1,13 @@
 require("dotenv").config();
 import express from "express";
+import catalogRoutes from './routes/catalogRoute';
 import { connectDB } from "./configDB/configDB";
-import catalogRoute from "./routes/catalogRoute";
 
 const app = express();
 const port = process.env.PORT || 9000;
 
 app.use(express.json());
-app.use('/api', catalogRoute);
+app.use('/api', catalogRoutes);
 
 // Connect to the database
 connectDB();
