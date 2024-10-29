@@ -1,4 +1,7 @@
 FROM node:20.18.0-slim
+
+RUN npm install -g ts-node nodemon
+
 WORKDIR /usr/node/app/auth-service
 
 COPY ./api/auth-service/package*.json .
