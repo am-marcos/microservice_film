@@ -1,16 +1,15 @@
 services:
   auth-backend:
-    build: {
-      context: ./,
+    build:
+      context: ./
       dockerfile: docker/auth/node/Dockerfile
-    }
     restart: always
     ports:
       - '9001:9001'
     env_file:
       - ./api/auth-service/.env
     volumes:
-        - ./api:/usr/node/app/src
+      - ./api/auth-service:/usr/node/app/api/auth-service
   
   cart-backend:
     build: {

@@ -1,20 +1,30 @@
 FROM node:20.18.0-slim
 
-RUN npm install -g ts-node nodemon
+# Définir le dossier de travail final pour l'application
+WORKDIR /usr/node/app/api/auth-service
 
-WORKDIR /usr/node/app/auth-service
+# Copier les fichiers package.json et package-lock.json
+COPY ./api/auth-service/package*.json ./
 
-COPY ./api/auth-service/package*.json .
-
+# Installer les dépendances
 RUN npm install
 
-WORKDIR /usr/node/app/api/auth-service
+# Installer les dépendances globales
+RUN npm install -g ts-node nodemon
+
+# Copier tout le code source après l'installation des dépendances
 COPY ./api/auth-service .
 
-ENV TZ=Europe/Paris
-
-EXPOSE 9001
-
+# Assurer les permissions correctes pour l'utilisateur `node`
+USER root
+RUN chown -R node:node /usr/node/app/api/auth-service
 USER node
 
+# Définir le fuseau horaire
+ENV TZ=Europe/Paris
+
+# Exposer le port 9001
+EXPOSE 9001
+
+# Lancer le serveur
 CMD ["npm", "run", "dev"]
