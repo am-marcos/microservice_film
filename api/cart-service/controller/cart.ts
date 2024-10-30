@@ -40,7 +40,7 @@ import {Cart} from '../model/Cart'
         
     })
     
-    // Modifier le panier d'un user
+    // Ajouter un film dans le panier d'un user
     
     router.put('/:id/:movieId', async(req: Request, res: Response, next: NextFunction) => {
 
@@ -62,15 +62,22 @@ import {Cart} from '../model/Cart'
         }
     })
 
-    // Supprimer un article dans le panier d'un user 
+    // Supprimer un film dans le panier d'un user 
     router.delete('/:id/:movieId', async(req: Request, res: Response, next: NextFunction) => {
         const {id, movieId} = req.params
         
         try{
 
             const findOneCart = await Cart.findById(id)
-                        
+            let fill: Array<any> = []
+            fill.push(findOneCart?.movies)
+            const data = fill[0].filter((e: string) => e!.toString() !== movieId.toString())
 
+            await Cart.findByIdAndUpdate(
+                {_id : id},
+                {movies : data}
+            ).exec()
+            
             res.json(findOneCart).status(200)
 
         }catch(err){
