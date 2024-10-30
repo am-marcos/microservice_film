@@ -13,7 +13,7 @@ import {Cart} from '../model/Cart'
         try{
             const pannier = await Cart.findOne({user_id: id}).exec()
     
-            res.json("Ok c'est GOOD")
+            res.json(pannier).status(200)
             
         } catch (err) {
             res.status(500).json({ error: err })
