@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import express from 'express'
 const router = express.Router()
-import {Cart} from '../model/Cart'
+import { Cart } from '../model/Cart'
+import { checkCartExist , checkMovieExist } from '../middleware/cartMiddleware';
 
 
     // Récupérer le panier d'un user 
@@ -42,7 +43,7 @@ import {Cart} from '../model/Cart'
     
     // Ajouter un film dans le panier d'un user
     
-    router.put('/:id/:movieId', async(req: Request, res: Response, next: NextFunction) => {
+    router.put('/:id/:movieId',checkCartExist, checkMovieExist, async(req: Request, res: Response, next: NextFunction) => {
 
         const {id, movieId} = req.params
         
@@ -63,7 +64,8 @@ import {Cart} from '../model/Cart'
     })
 
     // Supprimer un film dans le panier d'un user 
-    router.delete('/:id/:movieId', async(req: Request, res: Response, next: NextFunction) => {
+    router.delete('/:id/:movieId', checkCartExist, checkMovieExist, async(req: Request, res: Response, next: NextFunction) => {
+
         const {id, movieId} = req.params
         
         try{

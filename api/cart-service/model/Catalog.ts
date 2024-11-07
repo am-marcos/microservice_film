@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-export const movieSchema = new Schema({
+export const catalogSchema = new Schema({
     picture: String,
     title: String,
     summary: String,
@@ -10,4 +10,4 @@ export const movieSchema = new Schema({
     genre: Array<String>
 });
 
-export const Movie = mongoose.model('Movie', movieSchema);
+export const Catalog = mongoose.model('Catalog', catalogSchema);
