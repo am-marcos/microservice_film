@@ -1,1 +1,1 @@
-console.log("Hello from cart-service");
+console.log('Hello from cart-service');

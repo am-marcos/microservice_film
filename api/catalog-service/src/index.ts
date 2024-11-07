@@ -1,7 +1,7 @@
-require("dotenv").config();
-import express from "express";
+require('dotenv').config();
+import express from 'express';
 import catalogRoutes from './routes/catalogRoute';
-import { connectDB } from "./configDB/configDB";
+import { connectDB } from './configDB/configDB';
 
 const app = express();
 const port = process.env.PORT || 9000;
@@ -13,7 +13,7 @@ app.use('/api', catalogRoutes);
 connectDB();
 
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+    console.log(`Server running on port ${port}`);
 });
 
-console.log("Hello from catalog service");
+console.log('Hello from catalog service');

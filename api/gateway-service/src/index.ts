@@ -1,1 +1,1 @@
-console.log("Hello from gateway-service");
+console.log('Hello from gateway-service');

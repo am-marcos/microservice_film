@@ -4,7 +4,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 interface ICatalog extends Document {
     picture: string;
     title: string;
-    summary: string; 
+    summary: string;
     release_date: Date;
     author: string;
     duration: number;
@@ -19,7 +19,7 @@ const CatalogSchema: Schema = new Schema({
     release_date: { type: Date, required: true },
     author: { type: String, required: true },
     duration: { type: Number, required: true },
-    genre: { type: String, required: true } // Genre est une chaîne de caractères
+    genre: { type: String, required: true }, // Genre est une chaîne de caractères
 });
 
 const Catalog = mongoose.model<ICatalog>('Catalog', CatalogSchema);
