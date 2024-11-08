@@ -12,7 +12,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: '2024-09-30.acacia',
 });
 
-// Passe l'instance de Stripe aux routes
+// Passe l'instance de Stripe aux routes pi_3QIoIgA2lJMJiBMR16ulDbHp_secret_kAZwzU5d1PArzP8Wb6lMwZuUQ
 app.use('/api/payment', paymentRoutes(stripe));
 
 const PORT = process.env.PORT || 9005;
