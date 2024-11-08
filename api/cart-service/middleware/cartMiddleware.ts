@@ -32,7 +32,7 @@ const checkMovieExistInCart = (async (req: Request, res: Response, next: NextFun
 
     const exists = array[0].includes(movieId)
 
-    exists !== true ? next() : res.json({error : 'Le film existe déjà dans votre panier'})
+    exists !== true ? next() : res.json({error : 'Le film existe déjà dans votre panier'}).status(409)
 })
 
 export {
