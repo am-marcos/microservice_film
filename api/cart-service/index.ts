@@ -16,7 +16,7 @@ const options = {
         },
         servers: [
             {
-                url : 'http://localhost:12345'
+                url : 'http://localhost:9002'
             }
         ], 
     },
@@ -31,7 +31,6 @@ app.use(
     swaggerUi.serve,
     swaggerUi.setup(specs)
 );
-app.use(express.urlencoded({ extended: true }));
 
 app.use('/cart', cart)
 
