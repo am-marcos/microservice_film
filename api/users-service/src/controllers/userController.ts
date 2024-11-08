@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import User from "../models/userModels";
-
+import mongoose from "mongoose";
 export const createUser = async (
   req: Request,
   res: Response
@@ -13,10 +13,6 @@ export const createUser = async (
   } catch (error) {
     res.status(500).json({ error: "Failed to create user" });
   }
-};
-
-export const bonjour = async (req: Request, res: Response): Promise<void> => {
-  res.status(200).json({ message: "Bonjour" });
 };
 
 export const getUsers = async (req: Request, res: Response): Promise<void> => {
@@ -40,7 +36,10 @@ export const getUserById = async (
       res.status(404).json({ error: "User not found" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch user" });
+    console.error("Error fetching user:", error); // Log the error
+    res
+      .status(500)
+      .json({ error: "Failed to fetch user", details: (error as any).message });
   }
 };
 
@@ -49,8 +48,15 @@ export const updateUser = async (
   res: Response
 ): Promise<void> => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      res.status(400).json({ error: "Invalid user ID" });
+    }
+
+    const user = await User.findByIdAndUpdate(id, req.body, {
       new: true,
+      runValidators: true,
     });
     if (user) {
       res.status(200).json(user);
@@ -58,7 +64,11 @@ export const updateUser = async (
       res.status(404).json({ error: "User not found" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Failed to update user" });
+    console.error("Error updating user:", error); // Log the error
+    res.status(500).json({
+      error: "Failed to update user",
+      details: (error as any).message,
+    });
   }
 };
 
