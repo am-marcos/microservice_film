@@ -1,5 +1,5 @@
-import Catalog from '../models/catalogModel'; // Assurez-vous que le chemin est correct
-import { ICatalog } from '../models/catalogModel'; // Assurez-vous que le chemin est correct
+import Catalog from '../models/catalogModel'; 
+import { ICatalog } from '../models/catalogModel'; 
 
 class CatalogService {
     // creation d'un catalogue
