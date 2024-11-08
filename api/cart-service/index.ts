@@ -27,7 +27,7 @@ connectDB()
 
 const specs = swaggerJsdoc(options)
 app.use(
-    "/swagger",
+    "/api-docs",
     swaggerUi.serve,
     swaggerUi.setup(specs)
 );

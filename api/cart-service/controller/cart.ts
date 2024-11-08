@@ -37,10 +37,13 @@ import { checkCartExist , checkMovieExist, checkMovieExistInCart } from '../midd
 
     /**
  * @swagger
- * /cart/{user_id}:
+ * /cart/{id}:
  *   get:
  *     summary: Returns one Cart by user_id
  *     tags: [Cart]
+ *     parameters:
+ *       - in: path
+ *         name: id
  *     responses:
  *       200:
  *         description: The list of the Cart
@@ -74,7 +77,7 @@ import { checkCartExist , checkMovieExist, checkMovieExistInCart } from '../midd
  *     tags: [Cart]
  *     parameters:
  *       - in: path
- *         user_id: id
+ *         name: id
  *         schema:
  *           type: string
  *         required: true
@@ -118,8 +121,9 @@ import { checkCartExist , checkMovieExist, checkMovieExistInCart } from '../midd
  *     tags: [Cart]
  *     parameters:
  *       - in: path
- *         user_id: id
- *         movieId: id
+ *         name: id
+ *       - in: path
+ *         name : movieId
  *         schema:
  *           type: string
  *         required: true
@@ -167,8 +171,9 @@ import { checkCartExist , checkMovieExist, checkMovieExistInCart } from '../midd
  *     tags: [Cart]
  *     parameters:
  *       - in: path
- *         user_id: id
- *         movieId: id
+ *         name: id
+ *       - in: path
+ *         name : movieId
  *         schema:
  *           type: string
  *         required: true
