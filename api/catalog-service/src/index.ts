@@ -20,3 +20,5 @@ app.listen(port, () => {
 });
 
 console.log('Hello from catalog service');
+
+export default app;
