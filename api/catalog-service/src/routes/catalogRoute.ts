@@ -7,7 +7,7 @@ const router = Router();
  * @swagger
  * /api/catalogs:
  *   post:
- *     summary: Crée un nouveau film 
+ *     summary: Crée un nouveau film
  *     tags: [Films]
  *     requestBody:
  *       required: true

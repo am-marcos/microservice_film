@@ -1,5 +1,5 @@
-import Catalog from '../models/catalogModel'; 
-import { ICatalog } from '../models/catalogModel'; 
+import Catalog from '../models/catalogModel';
+import { ICatalog } from '../models/catalogModel';
 
 class CatalogService {
     // creation d'un catalogue
