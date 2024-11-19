@@ -16,7 +16,7 @@ const options = {
         },
         servers: [
             {
-                url : 'http://localhost:9002'
+                url : 'http://localhost:1234'
             }
         ], 
     },
@@ -40,3 +40,4 @@ app.listen(process.env.PORT, () => {
     console.log(`Server started on localhost:${process.env.PORT}`);
 });
 
+exports.default = app
