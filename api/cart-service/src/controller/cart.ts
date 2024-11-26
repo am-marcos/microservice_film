@@ -59,9 +59,13 @@ import { checkCartExist , checkMovieExist, checkMovieExistInCart } from '../midd
 
         const {id} = req.params
 
+        console.log(id);
+        
+        
         try{
             const pannier = await Cart.findOne({user_id: id}).exec()
-    
+            
+            console.log(pannier);
             res.json(pannier).status(200)
             
         } catch (err) {
