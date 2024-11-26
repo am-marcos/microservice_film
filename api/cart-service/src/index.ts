@@ -4,7 +4,7 @@ export const app = express();
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
-import cart from '../controller/cart';
+import cart from './controller/cart';
 
 const options = {
     definition : {
