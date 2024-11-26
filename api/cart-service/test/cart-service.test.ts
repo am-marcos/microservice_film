@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
-import { app} from '../index';
+import { app } from '../src/index'
 import { Server } from 'http';
 import dotenv from 'dotenv';
 
@@ -35,7 +35,6 @@ describe('Cart API', () => {
         });
         expect(response.status).toBe(201);
         expect(response.body).toHaveProperty('_id');
-        userId = request.params.id;
     });
 
     it('should handle error when creating a new Cart', async () => {

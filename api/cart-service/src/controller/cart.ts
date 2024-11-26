@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import express from 'express'
 const router = express.Router()
-import { Cart } from '../model/Cart'
+import { Cart } from '../model/Cart';
 import { checkCartExist , checkMovieExist, checkMovieExistInCart } from '../middleware/cartMiddleware';
 
 
