@@ -1,1 +1,1 @@
-console.log("Hello from auth-service");
+console.log('Hello from auth-service');

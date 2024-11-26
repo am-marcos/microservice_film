@@ -1,21 +1,24 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
+require('dotenv').config();
+import express from 'express';
+import catalogRoutes from './routes/catalogRoute';
+import { connectDB } from './configDB/configDB';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './swaggerConfig';
 
 const app = express();
-const port = process.env.PORT || 27017;
-const dbUri = process.env.DB_URI;
+const port = process.env.PORT || 9000;
 
-mongoose
-  .connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log("Connected to the database");
-    app.listen(port, () => {
-      console.log(`Server running on port ${port}`);
-    });
-  })
-  .catch((err: any) => {
-    console.error("Database connection error:", err);
-  });
+app.use(express.json());
+app.use('/api', catalogRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-console.log("Hello from catalog-service");
+// Connect to the database
+connectDB();
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
+
+console.log('Hello from catalog service');
+
+export default app;

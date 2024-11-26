@@ -1,1 +1,1 @@
-console.log("Hello from payment-service");
+console.log('Hello from payment-service');
