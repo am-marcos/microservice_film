@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, Mock } from 'vitest';
 import mongoose from 'mongoose';
-import connectDB from '../config/db';
+import connectDB from '../src/config/db';
 import dotenv from 'dotenv';
 
 dotenv.config();
