@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
-import { app } from '../src/index'
+import { app } from '../index'
 import { Server } from 'http';
 import dotenv from 'dotenv';
 
