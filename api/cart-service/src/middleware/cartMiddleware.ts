@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import {Cart} from '../model/Cart'
-import {Catalog} from '../model/Catalog'
+import { Cart } from '../model/Cart';
+import { Catalog } from '../model/Catalog'
 
 const checkCartExist = (async (req: Request, res: Response, next: NextFunction) => {
 
