@@ -70,10 +70,18 @@ services:
     ports:
       - "27017:27017"
 
-  # catalog pour mongo
+    # catalog pour mongo
 
-  catalog-db:
-    build: { context: ./, dockerfile: docker/catalog/mongo/Dockerfile }
-    restart: always
-    ports:
-      - "27019:27017"
+    catalog-db:
+      build: { context: ./, dockerfile: docker/catalog/mongo/Dockerfile }
+      restart: always
+      ports:
+        - "27018:27017"
+
+    payment-db:
+      image: mongo:6.0.3
+      ports:
+        - "27019:27017"
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: example
