@@ -3,6 +3,7 @@ import authRoutes from './routes/auth.routes';
 import { connectDatabase } from './controllers/database.controller';
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swaggers/swagger";
+require('dotenv').config();
 
 const app = express();
 

@@ -4,7 +4,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 const router = Router();
 
 const userServiceProxy = createProxyMiddleware({
-    target: process.env.USER_SERVICE_URL,
+    target: process.env.USER_SERVICE_PORT,
     changeOrigin: true,
     pathRewrite: {
         '^/api/users': '/users',
@@ -12,7 +12,7 @@ const userServiceProxy = createProxyMiddleware({
 });
 
 const cartServiceProxy = createProxyMiddleware({
-    target: process.env.CART_SERVICE_URL,
+    target: process.env.CART_SERVICE_PORT,
     changeOrigin: true,
     pathRewrite: {
         '^/api/cart': '/cart',
@@ -20,7 +20,7 @@ const cartServiceProxy = createProxyMiddleware({
 });
 
 const catalogServiceProxy = createProxyMiddleware({
-    target: process.env.CATALOG_SERVICE_URL,
+    target: process.env.CATALOG_SERVICE_PORT,
     changeOrigin: true,
     pathRewrite: {
         '^/api/catalog': '/catalog',
