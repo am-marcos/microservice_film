@@ -57,15 +57,11 @@ import { checkCartExist , checkMovieExist, checkMovieExistInCart } from '../midd
 
     router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
 
-        const {id} = req.params
-
-        console.log(id);
-        
+        const {id} = req.params        
         
         try{
             const pannier = await Cart.findOne({user_id: id}).exec()
             
-            console.log(pannier);
             res.json(pannier).status(200)
             
         } catch (err) {

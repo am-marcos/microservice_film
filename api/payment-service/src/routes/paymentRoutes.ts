@@ -1,51 +1,55 @@
-import { Router, Request, Response } from 'express';
-import Stripe from 'stripe';
-import logger from '../logger';
+import { Router, Request, Response } from "express";
+import Stripe from "stripe";
+import logger from "../logger";
+import Payment from "../models/paymentModel";
+import { AuthenticatedRequest } from "../middleware/authMiddleware";
 
 export default (stripe: Stripe) => {
-  const router = Router();
+    const router = Router();
 
-  // Route pour créer un Payment Intent
-  router.post('/create-payment-intent', async (req: Request, res: Response) => {
-    try {
-      const { amount } = req.body;
-      logger.info('Tentative de création du Payment Intent', { amount });
+    // Créer un Payment Intent
+    router.post("/create-payment-intent", async (req: AuthenticatedRequest, res: Response) => {
+        try {
+            const { amount } = req.body;
+            logger.info("Création du Payment Intent", { amount, user: req.user });
 
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount,
-        currency: 'eur',
-        payment_method_types: ['card'],
-      });
+            const paymentIntent = await stripe.paymentIntents.create({
+                amount,
+                currency: "eur",
+                payment_method_types: ["card"],
+            });
 
-      logger.info('Payment Intent créé avec succès', { paymentIntentId: paymentIntent.id });
-      res.status(200).json({
-        clientSecret: paymentIntent.client_secret,
-      });
-    } catch (error) {
-      logger.error('Erreur lors de la création du Payment Intent', { error });
-      res.status(500).json({ error: 'Une erreur est survenue lors du paiement.' });
-    }
-  });
+            res.status(200).json({ clientSecret: paymentIntent.client_secret });
+        } catch (error) {
+            logger.error("Erreur lors de la création du Payment Intent", { error });
+            res.status(500).json({ error: "Une erreur est survenue." });
+        }
+    });
 
-  // Route pour vérifier le statut d'un paiement
-  router.get('/confirm-payment/:id', async (req: Request, res: Response) => {
-    try {
-      const paymentIntentId = req.params.id;
-      logger.info('Tentative de confirmation du Payment Intent', { paymentIntentId });
+    // Confirmer un paiement
+    router.get("/confirm-payment/:id", async (req: AuthenticatedRequest, res: Response) => {
+        try {
+            const paymentIntentId = req.params.id;
+            const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
 
-      const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
-      logger.info('Statut actuel du Payment Intent', { status: paymentIntent.status });
+            if (paymentIntent.status === "succeeded") {
+                const payment = new Payment({
+                    paymentIntentId: paymentIntent.id,
+                    amount: paymentIntent.amount,
+                    currency: paymentIntent.currency,
+                    status: paymentIntent.status,
+                });
+                await payment.save();
 
-      if (paymentIntent.status === 'succeeded') {
-        res.status(200).json({ status: 'succeeded' });
-      } else {
-        res.status(400).json({ status: paymentIntent.status });
-      }
-    } catch (error) {
-      logger.error('Erreur lors de la vérification du Payment Intent', { error });
-      res.status(500).json({ error: 'Une erreur est survenue lors de la vérification du paiement.' });
-    }
-  });
+                res.status(200).json({ status: "Paiement réussi !" });
+            } else {
+                res.status(400).json({ status: paymentIntent.status });
+            }
+        } catch (error) {
+            logger.error("Erreur lors de la confirmation du paiement", { error });
+            res.status(500).json({ error: "Une erreur est survenue." });
+        }
+    });
 
-  return router;
+    return router;
 };
