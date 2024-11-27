@@ -1,79 +1,79 @@
 services:
-    auth-backend:
-        build: { context: ./, dockerfile: docker/auth/node/Dockerfile }
-        restart: always
-        ports:
-            - '9001:9001'
-        env_file:
-            - ./api/auth-service/.env
-        volumes:
-            - ./api:/usr/node/app/src
+  auth-backend:
+    build: { context: ./, dockerfile: docker/auth/node/Dockerfile }
+    restart: always
+    ports:
+      - "9001:9001"
+    env_file:
+      - ./api/auth-service/.env
+    volumes:
+      - ./api:/usr/node/app/src
 
-    cart-backend:
-        build: { context: ./, dockerfile: docker/cart/node/Dockerfile }
-        restart: always
-        ports:
-            - '9002:9002'
-        env_file:
-            - ./api/cart-service/.env
-        volumes:
-            - ./api:/usr/node/app/src
+  cart-backend:
+    build: { context: ./, dockerfile: docker/cart/node/Dockerfile }
+    restart: always
+    ports:
+      - "9002:9002"
+    env_file:
+      - ./api/cart-service/.env
+    volumes:
+      - ./api:/usr/node/app/src
 
-    catalog-backend:
-        build: { context: ./, dockerfile: docker/catalog/node/Dockerfile }
-        restart: always
-        ports:
-            - '9000:9000'
-        env_file:
-            - ./api/catalog-service/.env
-        depends_on:
-            - catalog-db
-        volumes:
-            - ./api:/usr/node/app/src
+  catalog-backend:
+    build: { context: ./, dockerfile: docker/catalog/node/Dockerfile }
+    restart: always
+    ports:
+      - "9000:9000"
+    env_file:
+      - ./api/catalog-service/.env
+    depends_on:
+      - catalog-db
+    volumes:
+      - ./api:/usr/node/app/src
 
-    payment-backend:
-        build: { context: ./, dockerfile: docker/payment/node/Dockerfile }
-        restart: always
-        ports:
-            - '9005:9005'
-        env_file:
-            - ./api/payment-service/.env
-        volumes:
-            - ./api:/usr/node/app/src
+  payment-backend:
+    build: { context: ./, dockerfile: docker/payment/node/Dockerfile }
+    restart: always
+    ports:
+      - "9005:9005"
+    env_file:
+      - ./api/payment-service/.env
+    volumes:
+      - ./api:/usr/node/app/src
 
-    user-backend:
-        build: { context: ./, dockerfile: docker/user/node/Dockerfile }
-        restart: always
-        ports:
-            - '3001:3001'
-        env_file:
-            - ./api/users-service/.env
-        depends_on:
-            - user-db
-        volumes:
-            - ./api:/usr/node/app/src
+  user-backend:
+    build: { context: ./, dockerfile: docker/user/node/Dockerfile }
+    restart: always
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./api/users-service/.env
+    depends_on:
+      - user-db
+    volumes:
+      - ./api:/usr/node/app/src
 
-    gateway-backend:
-        build: { context: ./, dockerfile: docker/gateway/node/Dockerfile }
-        restart: always
-        ports:
-            - '3000:3000'
-        env_file:
-            - ./api/gateway-service/.env
-        volumes:
-            - ./api:/usr/node/app/src
-    # users pour mongo
+  gateway-backend:
+    build: { context: ./, dockerfile: docker/gateway/node/Dockerfile }
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./api/gateway-service/.env
+    volumes:
+      - ./api:/usr/node/app/src
+  # users pour mongo
 
-    user-db:
-        build: { context: ./, dockerfile: docker/user/mongo/Dockerfile }
-        restart: always
-        ports:
-            - '27017:27017'
+  user-db:
+    build: { context: ./, dockerfile: docker/user/mongo/Dockerfile }
+    restart: always
+    ports:
+      - "27017:27017"
 
-    # catalog pour mongo
+  # catalog pour mongo
 
-    catalog-db:
-        build: { context: ./, dockerfile: docker/catalog/mongo/Dockerfile }
-        restart: always
-        ports:
-            - '27018:27017'
+  catalog-db:
+    build: { context: ./, dockerfile: docker/catalog/mongo/Dockerfile }
+    restart: always
+    ports:
+      - "27019:27017"
